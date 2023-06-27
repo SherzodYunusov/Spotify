@@ -19,6 +19,17 @@ class QoshiqSerializer(serializers.ModelSerializer):
     class Meta:
         model = Qoshiq
         field = '__all__'
+        def validate_nom(self,  qiymat):
+            for i in qiymat:
+                if 'mp3' in i:
+                    raise serializers.ValidationError("bunday faylni yuklaash mumkun emas")
+                return qiymat
+
+        def validate_davomiylik(self, qiymat):
+            if qiymat > '00:07:00':
+                raise serializers.ValidationError("Xatolik!")
+            return qiymat
+
 
 class QoshiqchiSaqlashSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
