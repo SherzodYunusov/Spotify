@@ -9,16 +9,16 @@ class QoshiqchiSerializer(serializers.Serializer):
 
 
 class AlbomSerializer(serializers.ModelSerializer):
-    qoshiqchilar = QoshiqchiSerializer(many=True)
+    # albomlar = QoshiqchiSerializer(many=True)
     class Meta:
         model = Albom
-        field = '__all__'
+        fields = '__all__'
 
 class QoshiqSerializer(serializers.ModelSerializer):
-    albomlar = AlbomSerializer(many=True)
+    # albomlar = AlbomSerializer(many=True)
     class Meta:
         model = Qoshiq
-        field = '__all__'
+        fields = '__all__'
     def validate_nom(self,  qiymat):
         for i in qiymat:
             if 'mp3' in i:
