@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from asosiy.views import *
 from rest_framework.routers import DefaultRouter
+from drf_spectacular.views import SpectacularSwaggerView, SpectacularRedocView, SpectacularAPIView
 
 router = DefaultRouter()
 router.register("albom", AlbomModelViewSet)
@@ -27,7 +28,9 @@ router.register("qoshiq", QoshiqModelViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('qoshiqchi/', QoshiqchiApiView.as_view()),
-    path('', include(router.urls)),
+    path('apiview_docs/', SpectacularAPIView.as_view(), name="schames"),
+    path('docs/', SpectacularSwaggerView.as_view(url_name="schames")),
+    path('redocs/', SpectacularRedocView.as_view(url_name="schames")),
     path('qoshiqchi/<int:pk>/', QoshiqchiChangeApiView.as_view()),
 
 ]
